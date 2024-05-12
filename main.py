@@ -12,13 +12,15 @@ app.title = "Password Checker"
 # set up Grid
 app.set_grid(2, 1)
 
-def submit():
-    print("it works")
+def submit(event):
+    lbl.text = "It works"
 
 #create some widget
 btn = gp.Button(app, "Submit", submit)
-
+lbl = gp.Label(app, '')
 # put stuff in Grid!!!
-app.add(btn,1,1)
+app.add(btn,1,1, align='center')
+app.add(lbl,2,1, align='center')
+
 app.run()
 
