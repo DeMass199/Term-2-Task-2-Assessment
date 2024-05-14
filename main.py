@@ -26,6 +26,8 @@ def on_text_change(event):
     #     label = ""
     # elif text == "":
     #     label = ""
+     # elif text == "":
+    #     label = ""
 
 
 app = gp.GooeyPieApp('Hello!, I am a password Checker')
