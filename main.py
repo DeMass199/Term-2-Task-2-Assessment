@@ -1,16 +1,15 @@
 import gooeypie as gp
-#imports all the classes downloaded via the
-# pip
 
 def toggle(event):
     question.toggle()
 
 def on_text_change(event):
-    text = text_box.text
-    print(text)
- 
-    # if len(text) < 10:
-    #     print("Your password must be at least 10 characters long.")
+    text = secret.text
+
+    if len(text) < 10:
+        Label_length.text = f'{checkbox_false} Password does not meet length requirements'
+    else:
+        Label_length.text = f'{checkbox_true} Password meets length requirements'
 
     # elif gp.search("[A-Z]", text):
     #     print("Password must contain at least on uppercase letter.")
@@ -22,58 +21,64 @@ def on_text_change(event):
     #     print("Password must contain at least one number.")   
     # else:
     #     print("password is strong")
-        
-app = gp.GooeyPieApp('Hello!, I am a password Checker')
-
-question = gp.Secret(app)
-label = gp.Label(app, 'Please type in your password in the Box below')
-label_2 = gp.Label(app, 'Password must contain at least on uppercase letter')
-label_3 = gp.Label(app, 'Password must contain at least on lowercase letter')
-label_4 = gp.Label(app, 'Password must contain at least one number')
-# This is where the users password is.
-
-secret = gp.Secret(app)
-secret.width = 50
-app.width = 600
-app.height = 300
-app.title = "Password Checker"
-# sets the width attributes to 500
-
-text_box = gp.Textbox(app)
-text_box.add_event_listener('change', on_text_change)
-check = gp.Checkbox(app, '🪬 Show password')
-check.add_event_listener('change', toggle)
-
-# app.set_column_weights(column1_weight, column2_weight)
-# app.set_row_weights(row1_weight, row2_weight)
-
-# set up Grid
-app.set_grid(5, 2)
-# app.set_column_weights(0, 1)
-
-# # The second row will grow twice as much as the first row
-# app.set_row_weights(1, 2)
-app.add(label,1,1, align='center')
-app.add(question,2,1, align='center')
-app.add(label_2,3,1, align='center')
-app.add(label_3,4,1, align='center')
-app.add(label_4,5,1, align='center')
-app.add(check, 2, 2, align='center')
-
-
-app.run()
-
-
+  
 def submit(event):
     lbl.text = "It works"
 
-#create some widget
+
+# window properties     
+app = gp.GooeyPieApp('SPC (Secure password Checker)')
+app.width = 700
+app.height = 280
+app.title = "Password Checker"
+app.set_grid(6, 2)
+
+# instantiate widgets 
+label = gp.Label(app, f'Please type in your password to be checked in the Box below')
+Label_length = gp.Label(app, f'Password must have a Length greater then 10')
+Label_upper = gp.Label(app, f'Password must contain at least on uppercase letter A-Z')
+Label_lower = gp.Label(app, f'Password must contain at least on lowercase letter a-z')
+Label_num = gp.Label(app, f'Password must contain at least one number 0-9')
+secret = gp.Secret(app)
+secret.width = 50
+checkbox_true = "✅"
+checkbox_false = "❌"
+check = gp.Checkbox(app, '🪬 Show password')
 btn = gp.Button(app, "Submit", submit)
 lbl = gp.Label(app, '')
 
-# put stuff in Grid!!!
-app.add(btn,1,1, align='center')
-app.add(lbl,2,1, align='center')
+# place / add widgets in window
+app.add(label,1,1, align='center')
+app.add(secret,2,1, align='center')
+app.add(Label_length,3,1, align='center')
+app.add(Label_upper,4,1, align='center')
+app.add(Label_lower,5,1, align='center')
+app.add(check, 2, 2, align='center')
+# app.add(btn,1,1, align='center')
+# app.add(lbl,2,1, align='center')
+
+
+# event listeners for each widget
+check.add_event_listener('change', toggle)
+secret.add_event_listener('change',on_text_change)
+
+# run the app
+app.run()
+
+
+
+
+
+
+
+
+
+
+
+#create some widget
+
+
+# put
 
 
 
@@ -134,3 +139,31 @@ app.add(lbl,2,1, align='center')
 # #         label.text = ""
 # #     elif text == "":
 # #          label.text = ""
+
+# This Code is for Strong or not strong enough passwords: 
+# import gooeypie as gp
+
+# def login(event):
+#     if pass_inp.text == 'bestpassword':
+#         status_lbl.text = '✔ Access granted!'
+#     else:
+#         status_lbl.text = '❌ Access denied!'
+
+# app = gp.GooeyPieApp('Login')
+
+# user_lbl = gp.Label(app, "Username")
+# user_inp = gp.Input(app)
+# pass_lbl = gp.Label(app, "Password")
+# pass_inp = gp.Secret(app)
+# login_btn = gp.Button(app, 'Login', login)
+# status_lbl = gp.Label(app, '')
+
+# app.set_grid(4, 2)
+# app.add(user_lbl, 1, 1)
+# app.add(user_inp, 1, 2)
+# app.add(pass_lbl, 2, 1)
+# app.add(pass_inp, 2, 2)
+# app.add(login_btn, 3, 2)
+# app.add(status_lbl, 4, 2)
+
+# app.run()
