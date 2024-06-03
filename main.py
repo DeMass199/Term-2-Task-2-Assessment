@@ -17,12 +17,14 @@ def on_text_change(event):
             Label_upper.text = f'{checkbox_true} Password meets the requirement'
         else:
             Label_upper.text = f'{checkbox_false} Password does have any upper case letters'
+        break
 
-    # for char in text:
-    #     if char.isnumeric():
-    #         Label_num.text = f'{checkbox_true} Password meets this requirment '
-    #     else:
-    #         Label_num.text = f'{checkbox_false} Password need to have at least one number'
+    for char in text:
+        if char.isnumeric():
+            Label_num.text = f'{checkbox_true} Password meets this requirment '
+        else:
+            Label_num.text = f'{checkbox_false} Password need to have at least one number'
+        break
     
     # for char in text:
     #     if char.():
