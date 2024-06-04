@@ -6,33 +6,80 @@ def toggle(event):
 def on_text_change(event):
     text = secret.text
 
+    # length check
+
     if len(text) < 10:
         Label_length.text = f'{checkbox_false} Password does not meet length requirements'
     else:
         Label_length.text = f'{checkbox_true} Password meets the requirement'
-    
-    
+
+
+    # upper check
+    found_upper = False
+        
     for char in text:
         if char.isupper():
-            Label_upper.text = f'{checkbox_true} Password meets the requirement'
-        else:
-            Label_upper.text = f'{checkbox_false} Password does have any upper case letters'
-        break
+            found_upper = True
+        
+    
+    if found_upper == False:
+        Label_upper.text = f'{checkbox_false} Password needs to have an upper character'
+    else:
+        Label_upper.text = f'{checkbox_true} Password contains an upper characeter'
+
+    found_num = False
 
     for char in text:
         if char.isnumeric():
-            Label_num.text = f'{checkbox_true} Password meets this requirment '
-        else:
-            Label_num.text = f'{checkbox_false} Password need to have at least one number'
-        break
-    
-    # for char in text:
-    #     if char.():
-    #         Label_symbol.text = f'{checkbox_true} Password meets this requirment '
-    #     else:
-    #         Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
+            found_num = True
+        
+
+    if found_num == False:
+        Label_num.text = f'{checkbox_false} Password needs to have at least one number'
+    else:
+        Label_num.text = f'{checkbox_true} Password meets this requirment'
+       
     
 
+    found_alpha = False # have a variable that starts as False, that can be changed to true later on...
+    found_digit = False  
+    symbol_detected = False 
+
+    # check for symbols 
+    # if its not a letter or a number, then it must be a symbol
+
+    for char in text:
+        if char.isalpha():
+            found_alpha = True
+        break
+
+    for char in text:
+        if char.isdigit():
+            found_digit = True
+        break
+
+
+
+    if found_alpha == True:
+        Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
+    elif found_digit == True:
+        Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
+    else:
+        symbol_detected == True 
+        Label_symbol.text = f'{checkbox_true} Password meets this requirment '
+
+
+
+
+        
+        # if char.isalpha(): 
+        #     Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
+        # elif char.isdigit():
+        #     Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
+        # else:
+        #     Label_symbol.text = f'{checkbox_true} Password meets this requirment '
+        
+# isdigit():
     
     # If it meet all the above requirment then it will say that the password is strong unless it has
     # been related to any data breach.
