@@ -12,7 +12,7 @@ def on_text_change(event):
         Label_length.text = f'{checkbox_false} Password does not meet length requirements'
     else:
         Label_length.text = f'{checkbox_true} Password meets the requirement'
-
+        # return Label_length == True
 
     # upper check
     found_upper = False
@@ -39,50 +39,47 @@ def on_text_change(event):
     else:
         Label_num.text = f'{checkbox_true} Password meets this requirment'
        
-    
 
-    found_alpha = False # have a variable that starts as False, that can be changed to true later on...
-    found_digit = False  
-    symbol_detected = False 
 
-    # check for symbols 
-    # if its not a letter or a number, then it must be a symbol
+    symbol_checker = False
 
     for char in text:
-        if char.isalpha():
-            found_alpha = True
-        break
-
-    for char in text:
-        if char.isdigit():
-            found_digit = True
-        break
-
-
-
-    if found_alpha == True:
-        Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
-    elif found_digit == True:
+        if not char.isalnum():
+            symbol_checker = True
+            print(symbol_checker)
+     
+    if symbol_checker == False:
         Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
     else:
-        symbol_detected == True 
         Label_symbol.text = f'{checkbox_true} Password meets this requirment '
 
 
 
 
-        
-        # if char.isalpha(): 
-        #     Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
-        # elif char.isdigit():
-        #     Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
-        # else:
-        #     Label_symbol.text = f'{checkbox_true} Password meets this requirment '
+
+
+       # Back up code that works for the Symbol checker
+    # symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', '{', '}', ';', ':', '/', '?', '.', '>']
+    # symbols = False
+
+    # for char in text:
+    #     if char.isalpha():
+    #         symbols = True 
+
+    # if symbols == False:
+    #     Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
+    # else:
+    #     Label_symbol.text = f'{checkbox_true} Password meets this requirment '
+
+    # found_alpha = False # have a variable that starts as False, that can be changed to true later on...
+    # found_digit = False  
+    # symbol_detected = False 
+
         
 # isdigit():
     
-    # If it meet all the above requirment then it will say that the password is strong unless it has
-    # been related to any data breach.
+    # If it meet all the above requirment then it will say that the password is strong.
+    # Then it will check if it has been related to any data breach.
 
 
 def submit(event):
