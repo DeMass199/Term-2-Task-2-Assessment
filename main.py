@@ -4,15 +4,23 @@ def toggle(event):
     secret.toggle()
 
 def on_text_change(event):
+    progress = 100
+    negative = 25
     text = secret.text
+    
+    if checkbox_false == False:
+        print(progress)
+        progress -=25
+    else: 
+        checkbox_true == True
 
     # length check
-
     if len(text) < 10:
         Label_length.text = f'{checkbox_false} Password does not meet length requirements'
+        progress -= negative
+       
     else:
         Label_length.text = f'{checkbox_true} Password meets the requirement'
-        # return Label_length == True
 
     # upper check
     found_upper = False
@@ -24,6 +32,7 @@ def on_text_change(event):
     
     if found_upper == False:
         Label_upper.text = f'{checkbox_false} Password needs to have an upper character'
+        progress -= negative
     else:
         Label_upper.text = f'{checkbox_true} Password contains an upper characeter'
 
@@ -36,6 +45,7 @@ def on_text_change(event):
 
     if found_num == False:
         Label_num.text = f'{checkbox_false} Password needs to have at least one number'
+        progress -= negative
     else:
         Label_num.text = f'{checkbox_true} Password meets this requirment'
        
@@ -46,37 +56,27 @@ def on_text_change(event):
     for char in text:
         if not char.isalnum():
             symbol_checker = True
-            print(symbol_checker)
+            
      
     if symbol_checker == False:
         Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
+        progress -= negative
     else:
         Label_symbol.text = f'{checkbox_true} Password meets this requirment '
 
+    if progress == 100:
+        print("⭐️⭐️⭐️⭐️")
+    elif progress == 75:
+        print("⭐️⭐️⭐️")
+    elif progress == 50:
+        print("⭐️⭐️")
+    elif progress == 25:
+        print("⭐️")
+    else:
+        print("Password is weak")
 
 
-
-
-
-       # Back up code that works for the Symbol checker
-    # symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', '{', '}', ';', ':', '/', '?', '.', '>']
-    # symbols = False
-
-    # for char in text:
-    #     if char.isalpha():
-    #         symbols = True 
-
-    # if symbols == False:
-    #     Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
-    # else:
-    #     Label_symbol.text = f'{checkbox_true} Password meets this requirment '
-
-    # found_alpha = False # have a variable that starts as False, that can be changed to true later on...
-    # found_digit = False  
-    # symbol_detected = False 
-
-        
-# isdigit():
+    print(progress)  
     
     # If it meet all the above requirment then it will say that the password is strong.
     # Then it will check if it has been related to any data breach.
@@ -85,13 +85,12 @@ def on_text_change(event):
 def submit(event):
     lbl.text = "It works"
 
-
 # window properties     
 app = gp.GooeyPieApp('SPC (Secure password Checker)')
 app.width = 800
 app.height = 280
 app.title = "Password Checker"
-app.set_grid(6, 2)
+app.set_grid(6, 3)
 
 # instantiate widgets 
 label = gp.Label(app, f'Please type in your password to be checked in the Box below')
@@ -109,20 +108,20 @@ lbl = gp.Label(app, '')
 
 # place / add widgets in window
 app.add(label,1,1, align='center')
-app.add(secret,2,1, align='center')
-app.add(Label_length,3,1, align='center')
-app.add(Label_upper,4,1, align='center')
-app.add(Label_num,5,1, align='center')
-app.add(Label_symbol,6,1, align='center')
-# app.add(Label_symbol,6,1, align='center')
-app.add(check, 2, 2, align='center')
+app.add(secret,2,1, align='center', column_span = 2)
+app.add(Label_length,3,1, valign='middle')
+app.add(Label_num,4,1, valign='middle')
+app.add(Label_upper,5,1, valign='middle')
+app.add(Label_symbol,6,1, valign='middle')
+app.add(check, 2, 3, valign='middle')
+# app.add(progress,4,2, align='center')
 
 
 
 # event listeners for each widget
 check.add_event_listener('change', toggle)
 secret.add_event_listener('change',on_text_change)
-
+# progress.add_event_listener('change',password_progressbar)
 # run the app
 app.run()
 
