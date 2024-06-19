@@ -4,20 +4,20 @@ def toggle(event):
     secret.toggle()
 
 def on_text_change(event):
-    progress = 100
+    progress_score = 100
     negative = 25
     text = secret.text
     
     if checkbox_false == False:
-        print(progress)
-        progress -=25
+        print(progress_score)
+        progress_score -=25
     else: 
         checkbox_true == True
 
     # length check
     if len(text) < 10:
         Label_length.text = f'{checkbox_false} Password does not meet length requirements'
-        progress -= negative
+        progress_score -= negative
        
     else:
         Label_length.text = f'{checkbox_true} Password meets the requirement'
@@ -32,7 +32,7 @@ def on_text_change(event):
     
     if found_upper == False:
         Label_upper.text = f'{checkbox_false} Password needs to have an upper character'
-        progress -= negative
+        progress_score -= negative
     else:
         Label_upper.text = f'{checkbox_true} Password contains an upper characeter'
 
@@ -45,7 +45,7 @@ def on_text_change(event):
 
     if found_num == False:
         Label_num.text = f'{checkbox_false} Password needs to have at least one number'
-        progress -= negative
+        progress_score -= negative
     else:
         Label_num.text = f'{checkbox_true} Password meets this requirment'
        
@@ -60,23 +60,27 @@ def on_text_change(event):
      
     if symbol_checker == False:
         Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
-        progress -= negative
+        progress_score -= negative
     else:
         Label_symbol.text = f'{checkbox_true} Password meets this requirment '
 
-    if progress == 100:
+    if progress_score == 100:
+        progress.text = "⭐️⭐️⭐️⭐️"
         print("⭐️⭐️⭐️⭐️")
-    elif progress == 75:
+    elif progress_score == 75:
+        progress.text = "⭐️⭐️⭐️"
         print("⭐️⭐️⭐️")
-    elif progress == 50:
+    elif progress_score == 50:
+        progress.text = "⭐️⭐️"
         print("⭐️⭐️")
-    elif progress == 25:
+    elif progress_score == 25:
+        progress.text = "⭐️"
         print("⭐️")
     else:
+        progress.text = "Password is weak"
         print("Password is weak")
 
 
-    print(progress)  
     
     # If it meet all the above requirment then it will say that the password is strong.
     # Then it will check if it has been related to any data breach.
@@ -99,6 +103,7 @@ Label_upper = gp.Label(app, f'Password must contain at least on uppercase letter
 Label_num = gp.Label(app, f'Password must contain at least one number 0-9')
 Label_symbol = gp.Label(app, f'Password must contain at least one symbol, ! @ # $ % ^ & * () ? <> : "" - + = _ [] ; , . / ')
 secret = gp.Secret(app)
+progress = gp.StyleLabel(app, '')
 secret.width = 50
 checkbox_true = "✅"
 checkbox_false = "❌"
@@ -114,7 +119,7 @@ app.add(Label_num,4,1, valign='middle')
 app.add(Label_upper,5,1, valign='middle')
 app.add(Label_symbol,6,1, valign='middle')
 app.add(check, 2, 3, valign='middle')
-# app.add(progress,4,2, align='center')
+app.add(progress,4,2, align='center')
 
 
 
