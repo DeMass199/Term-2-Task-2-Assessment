@@ -1,16 +1,20 @@
 import gooeypie as gp
+from word_checker import check_if_contained_in_txt
+
+
+
 
 def toggle(event):
     secret.toggle()
 
 def on_text_change(event):
     progress_score = 100
-    negative = 25
+    negative = 20
     text = secret.text
     
     if checkbox_false == False:
         print(progress_score)
-        progress_score -=25
+        progress_score -=20
     else: 
         checkbox_true == True
 
@@ -20,7 +24,7 @@ def on_text_change(event):
         progress_score -= negative
        
     else:
-        Label_length.text = f'{checkbox_true} Password meets the requirement'
+        Label_length.text = f'{checkbox_true} Password meets the length requirement'
 
     # upper check
     found_upper = False
@@ -47,7 +51,7 @@ def on_text_change(event):
         Label_num.text = f'{checkbox_false} Password needs to have at least one number'
         progress_score -= negative
     else:
-        Label_num.text = f'{checkbox_true} Password meets this requirment'
+        Label_num.text = f'{checkbox_true} Password meets the at least one number requirment'
        
 
 
@@ -62,29 +66,38 @@ def on_text_change(event):
         Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
         progress_score -= negative
     else:
-        Label_symbol.text = f'{checkbox_true} Password meets this requirment '
+        Label_symbol.text = f'{checkbox_true} Password meets the symbol requirment'
+
+    label_common.text = " "
+    if check_if_contained_in_txt(text):
+        label_common.text = f'{checkbox_false} Password contains a common text'
+        progress_score -= negative
+        # print("ALERT")
+    else:
+        label_common.text = f'{checkbox_true} Password does not contain any common text'
 
     if progress_score == 100:
+        progress.text = "⭐️⭐️⭐️⭐️⭐️"
+        print("⭐️⭐️⭐️⭐️⭐️")
+    elif progress_score == 80:
         progress.text = "⭐️⭐️⭐️⭐️"
         print("⭐️⭐️⭐️⭐️")
-    elif progress_score == 75:
+    elif progress_score == 60:
         progress.text = "⭐️⭐️⭐️"
         print("⭐️⭐️⭐️")
-    elif progress_score == 50:
+    elif progress_score == 40:
         progress.text = "⭐️⭐️"
         print("⭐️⭐️")
-    elif progress_score == 25:
+    elif progress_score == 20:
         progress.text = "⭐️"
         print("⭐️")
     else:
         progress.text = "Password is weak"
         print("Password is weak")
 
-
     
     # If it meet all the above requirment then it will say that the password is strong.
     # Then it will check if it has been related to any data breach.
-
 
 def submit(event):
     lbl.text = "It works"
@@ -94,7 +107,7 @@ app = gp.GooeyPieApp('SPC (Secure password Checker)')
 app.width = 800
 app.height = 280
 app.title = "Password Checker"
-app.set_grid(6, 3)
+app.set_grid(7, 3)
 
 # instantiate widgets 
 label = gp.Label(app, f'Please type in your password to be checked in the Box below')
@@ -103,6 +116,7 @@ Label_upper = gp.Label(app, f'Password must contain at least on uppercase letter
 Label_num = gp.Label(app, f'Password must contain at least one number 0-9')
 Label_symbol = gp.Label(app, f'Password must contain at least one symbol, ! @ # $ % ^ & * () ? <> : "" - + = _ [] ; , . / ')
 secret = gp.Secret(app)
+label_common = gp.Label(app, f'Password must not contain a common password' )
 progress = gp.StyleLabel(app, '')
 secret.width = 50
 checkbox_true = "✅"
@@ -118,9 +132,9 @@ app.add(Label_length,3,1, valign='middle')
 app.add(Label_num,4,1, valign='middle')
 app.add(Label_upper,5,1, valign='middle')
 app.add(Label_symbol,6,1, valign='middle')
+app.add(label_common,7,1, valign='middle')
 app.add(check, 2, 3, valign='middle')
 app.add(progress,4,2, align='center')
-
 
 
 # event listeners for each widget
@@ -129,7 +143,3 @@ secret.add_event_listener('change',on_text_change)
 # progress.add_event_listener('change',password_progressbar)
 # run the app
 app.run()
-
-
-
-
