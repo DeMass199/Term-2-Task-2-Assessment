@@ -1,9 +1,6 @@
 import gooeypie as gp
 from word_checker import check_if_contained_in_txt
 
-
-
-
 def toggle(event):
     secret.toggle()
 
@@ -92,8 +89,8 @@ def on_text_change(event):
         progress.text = "⭐️"
         print("⭐️")
     else:
-        progress.text = "Password is weak"
-        print("Password is weak")
+        progress.text = "Password is very weak"
+        print("Password is very weak")
 
     
     # If it meet all the above requirment then it will say that the password is strong.
