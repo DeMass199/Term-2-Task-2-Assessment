@@ -1,8 +1,18 @@
 import gooeypie as gp
 from word_checker import check_if_contained_in_txt
 
+
 def toggle(event):
     secret.toggle()
+
+# def breach_checker(event):
+#     url = 'https://haveibeenpwned.com/Password'
+#     result = requests.get(url)
+
+#     if result.status_code != 200:
+#         raise RuntimeError(f'Error: {result.text}. Please try again')
+
+#     return result
 
 def on_text_change(event):
     progress_score = 100
@@ -35,7 +45,7 @@ def on_text_change(event):
         Label_upper.text = f'{checkbox_false} Password needs to have an upper character'
         progress_score -= negative
     else:
-        Label_upper.text = f'{checkbox_true} Password contains an upper characeter'
+        Label_upper.text = f'{checkbox_true} Password contains an upper character'
 
     found_num = False
 
@@ -48,7 +58,7 @@ def on_text_change(event):
         Label_num.text = f'{checkbox_false} Password needs to have at least one number'
         progress_score -= negative
     else:
-        Label_num.text = f'{checkbox_true} Password meets the at least one number requirment'
+        Label_num.text = f'{checkbox_true} Password meets the at least one number requirement'
        
 
 
@@ -75,33 +85,50 @@ def on_text_change(event):
 
     if progress_score == 100:
         progress.text = "⭐️⭐️⭐️⭐️⭐️"
-        print("⭐️⭐️⭐️⭐️⭐️")
+        # print("⭐️⭐️⭐️⭐️⭐️")
     elif progress_score == 80:
         progress.text = "⭐️⭐️⭐️⭐️"
-        print("⭐️⭐️⭐️⭐️")
+        # print("⭐️⭐️⭐️⭐️")
     elif progress_score == 60:
         progress.text = "⭐️⭐️⭐️"
-        print("⭐️⭐️⭐️")
+        # print("⭐️⭐️⭐️")
     elif progress_score == 40:
         progress.text = "⭐️⭐️"
-        print("⭐️⭐️")
+        # print("⭐️⭐️")
     elif progress_score == 20:
         progress.text = "⭐️"
-        print("⭐️")
+        # print("⭐️")
     else:
         progress.text = "Password is very weak"
-        print("Password is very weak")
+        # print("Password is very weak")
 
-    
-    # If it meet all the above requirment then it will say that the password is strong.
-    # Then it will check if it has been related to any data breach.
+    if progress_score == 100:
+        progress_score_display.text = "100 percent secure, your password is strong:"
+        # print("⭐️⭐️⭐️⭐️⭐️")
+    elif progress_score == 80:
+        progress_score_display.text = "80 percent secure, your password is great:"
+        # print("⭐️⭐️⭐️⭐️")
+    elif progress_score == 60:
+        progress_score_display.text = "60 percent secure, your password is good:"
+        # print("⭐️⭐️⭐️")
+    elif progress_score == 40:
+        progress_score_display.text = "40 percent secure, your password is okay but need a little work:"
+        # print("⭐️⭐️")
+    elif progress_score == 20:
+        progress_score_display.text = "20 percent this password is weak, you need some major improvements:"
+        # print("⭐️")
+    else:
+        progress_score_display.text = "This is below 20 percent it is not secure, you should make a new this is 💩:"
+
+
+# Then it will check if it has been related to any data breach.
 
 def submit(event):
     lbl.text = "It works"
 
 # window properties     
 app = gp.GooeyPieApp('SPC (Secure password Checker)')
-app.width = 800
+app.width = 1000
 app.height = 280
 app.title = "Password Checker"
 app.set_grid(7, 3)
@@ -115,6 +142,7 @@ Label_symbol = gp.Label(app, f'Password must contain at least one symbol, ! @ # 
 secret = gp.Secret(app)
 label_common = gp.Label(app, f'Password must not contain a common password' )
 progress = gp.StyleLabel(app, '')
+progress_score_display = gp.Label(app, "" )
 secret.width = 50
 checkbox_true = "✅"
 checkbox_false = "❌"
@@ -131,7 +159,8 @@ app.add(Label_upper,5,1, valign='middle')
 app.add(Label_symbol,6,1, valign='middle')
 app.add(label_common,7,1, valign='middle')
 app.add(check, 2, 3, valign='middle')
-app.add(progress,4,2, align='center')
+app.add(progress,5,2, align='center')
+app.add(progress_score_display,4,2,valign='middle', column_span = 2)
 
 
 # event listeners for each widget
