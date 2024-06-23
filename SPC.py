@@ -34,7 +34,7 @@ def on_text_change(event):
     else:
         Label_length.text = f'{checkbox_true} Password meets the length requirement'
 
-    # upper check
+    # uppercase check
     found_upper = False
         
     for char in text:
@@ -46,8 +46,7 @@ def on_text_change(event):
         progress_score -= negative
     else:
         Label_upper.text = f'{checkbox_true} Password contains an uppercase letter'
-
-
+   # Number check
     found_num = False
 
     for char in text:
@@ -60,20 +59,19 @@ def on_text_change(event):
     else:
         Label_num.text = f'{checkbox_true} Password meets the requirement of having a number'
        
-
+    # Symbol check
     symbol_checker = False
 
     for char in text:
         if not char.isalnum():
             symbol_checker = True
             
-     
     if symbol_checker == False:
         Label_symbol.text = f'{checkbox_false} Password need to have at least one Symbol'
         progress_score -= negative
     else:
         Label_symbol.text = f'{checkbox_true} Password meets the requirement of having a symbol'
-
+    # Common password check
     label_common.text = " "
     if check_if_contained_in_txt(text):
         label_common.text = f'{checkbox_false} Password contains a common text'
