@@ -71,11 +71,13 @@ def on_text_change(event):
         progress_score -= negative
     else:
         Label_symbol.text = f'{checkbox_true} Password meets the requirement of having a symbol'
+    
     # Common password check
     label_common.text = " "
+    
     if check_if_contained_in_txt(text):
-        label_common.text = f'{checkbox_false} Password contains a common text'
-        progress_score -= negative
+        label_common.text = f'{checkbox_false} Password is not strong as it has a common text'
+        progress_score -= 40
     else:
         label_common.text = f'{checkbox_true} Password does not contain any common text'
 
@@ -99,24 +101,23 @@ def on_text_change(event):
         # print("Password is very weak")
 
 
-
-    # if progress_score == 100:
-    #     progress_score_display.text = "100 percent secure, your password is strong:"
-    #     # print("⭐️⭐️⭐️⭐️⭐️")
-    # elif progress_score == 80:
-    #     progress_score_display.text = "80 percent secure, your password is great:"
-    #     # print("⭐️⭐️⭐️⭐️")
-    # elif progress_score == 60:
-    #     progress_score_display.text = "60 percent secure, your password is good:"
-    #     # print("⭐️⭐️⭐️")
-    # elif progress_score == 40:
-    #     progress_score_display.text = "40 percent secure, your password is okay but need a little work:"
-    #     # print("⭐️⭐️")
-    # elif progress_score == 20:
-    #     progress_score_display.text = "20 percent this password is weak, you need some major improvements:"
-    #     # print("⭐️")
-    # else:
-    #     progress_score_display.text = "This is below 20 percent it is not secure, you should make a new this is 💩:"
+    if progress_score == 100:
+        progress_score_display.text = "100 percent secure, your password is strong:"
+        # print("⭐️⭐️⭐️⭐️⭐️")
+    elif progress_score == 80:
+        progress_score_display.text = "80 percent secure, your password is great:"
+        # print("⭐️⭐️⭐️⭐️")
+    elif progress_score == 60:
+        progress_score_display.text = "60 percent secure, your password is good:"
+        # print("⭐️⭐️⭐️")
+    elif progress_score == 40:
+        progress_score_display.text = "40 percent secure, your password is okay but need a little work:"
+        # print("⭐️⭐️")
+    elif progress_score == 20:
+        progress_score_display.text = "20 percent this password is weak, you need some major improvements:"
+        # print("⭐️")
+    else:
+        progress_score_display.text = "This is below 20 percent it is not secure, you should make a new this is 💩:"
 
 
 # Then it will check if it has been related to any data breach.
@@ -128,7 +129,7 @@ def submit(event):
 app = gp.GooeyPieApp('SPC (Secure password Checker)')
 app.width = 1000
 app.height = 280
-app.title = "Password Checker"
+app.title = "SPC (Secure password Checker)"
 app.set_grid(7, 3)
 
 # instantiate widgets 
