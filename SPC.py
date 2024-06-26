@@ -1,7 +1,12 @@
 import gooeypie as gp
-import requests
+# import requests
 from word_checker import check_if_contained_in_txt
+import pyperclip
 
+def password_copy(text):
+    text = secret.text
+    pyperclip.copy(text) 
+    
 
 def toggle(event):
     secret.toggle()
@@ -146,6 +151,7 @@ secret.width = 50
 checkbox_true = "✅"
 checkbox_false = "❌"
 check = gp.Checkbox(app, '🪬 Show password')
+password = gp.Button(app, 'Copy', password_copy)
 btn = gp.Button(app, "Submit", submit)
 lbl = gp.Label(app, '')
 
@@ -160,6 +166,7 @@ app.add(label_common,7,1, valign='middle')
 app.add(check, 2, 3, valign='middle')
 app.add(progress,5,2, align='center')
 app.add(progress_score_display,4,2,valign='middle', column_span = 2)
+app.add(password,6,2, align = 'center')
 
 
 # event listeners for each widget
