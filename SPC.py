@@ -122,7 +122,7 @@ def on_text_change(event):
         progress_score_display.text = "20 percent this password is weak, you need some major improvements:"
         # print("⭐️")
     else:
-        progress_score_display.text = "This is below 20 percent it is not secure, you should make a new this is 💩:"
+        progress_score_display.text = "This is below 20 percent that mean it isn't secure, you should make a new password this is 💩:"
 
 
 # Then it will check if it has been related to any data breach.
@@ -138,7 +138,7 @@ app.title = "SPC (Secure password Checker)"
 app.set_grid(7, 3)
 
 # instantiate widgets 
-label = gp.Label(app, f'Please type in your password to be checked in the Box below')
+label = gp.Label(app, f'Please type in your password to be checked in the Box below :')
 Label_length = gp.Label(app, f'Password must have a Length greater then 10')
 Label_upper = gp.Label(app, f'Password must contain at least on uppercase letter A-Z')
 Label_num = gp.Label(app, f'Password must contain at least one number 0-9')
